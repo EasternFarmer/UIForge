@@ -1,26 +1,23 @@
-export interface UIF_Element {
-  children?: React.ReactNode
-  config?: UIF_Config
-}
-
 export type ColourType = "G.C.MULT" | "G.C.CHIPS" | "G.C.MONEY" | "G.C.XMULT" | "G.C.FILTER" |
-"G.C.BLUE" | "G.C.RED" | "G.C.GREEN" | "G.C.PALE_GREEN" | "G.C.ORANGE" | "G.C.IMPORTANT" |
-"G.C.GOLD" | "G.C.YELLOW" | "G.C.CLEAR" | "G.C.WHITE" | "G.C.PURPLE" | "G.C.BLACK" |
-"G.C.L_BLACK" | "G.C.GREY" | "G.C.CHANCE" | "G.C.JOKER_GREY" | "G.C.VOUCHER" | "G.C.BOOSTER" |
-"G.C.EDITION" | "G.C.DARK_EDITION" | "G.C.ETERNAL" | "G.C.PERISHABLE" | "G.C.RENTAL" |
-"G.C.UI.TEXT_LIGHT" | "G.C.UI.TEXT_DARK" | "G.C.UI.TEXT_INACTIVE" | "G.C.UI.BACKGROUND_LIGHT" |
-"G.C.UI.BACKGROUND_WHITE" | "G.C.UI.BACKGROUND_DARK" | "G.C.UI.BACKGROUND_INACTIVE" |
-"G.C.UI.OUTLINE_LIGHT" | "G.C.UI.OUTLINE_LIGHT_TRANS" | "G.C.UI.OUTLINE_DARK" |
-"G.C.UI.TRANSPARENT_LIGHT" | "G.C.UI.TRANSPARENT_DARK" | "G.C.UI.HOVER"
+  "G.C.BLUE" | "G.C.RED" | "G.C.GREEN" | "G.C.PALE_GREEN" | "G.C.ORANGE" | "G.C.IMPORTANT" |
+  "G.C.GOLD" | "G.C.YELLOW" | "G.C.CLEAR" | "G.C.WHITE" | "G.C.PURPLE" | "G.C.BLACK" |
+  "G.C.L_BLACK" | "G.C.GREY" | "G.C.CHANCE" | "G.C.JOKER_GREY" | "G.C.VOUCHER" | "G.C.BOOSTER" |
+  "G.C.EDITION" | "G.C.DARK_EDITION" | "G.C.ETERNAL" | "G.C.PERISHABLE" | "G.C.RENTAL" |
+  "G.C.UI.TEXT_LIGHT" | "G.C.UI.TEXT_DARK" | "G.C.UI.TEXT_INACTIVE" | "G.C.UI.BACKGROUND_LIGHT" |
+  "G.C.UI.BACKGROUND_WHITE" | "G.C.UI.BACKGROUND_DARK" | "G.C.UI.BACKGROUND_INACTIVE" |
+  "G.C.UI.OUTLINE_LIGHT" | "G.C.UI.OUTLINE_LIGHT_TRANS" | "G.C.UI.OUTLINE_DARK" |
+  "G.C.UI.TRANSPARENT_LIGHT" | "G.C.UI.TRANSPARENT_DARK" | "G.C.UI.HOVER" | `HEX("${string}")`
 
-export interface Tooltip {
-  title: string
-  text: string[]
-}
+// export interface Tooltip {
+//   title: string
+//   text: string[]
+// }
+
+export type AlignType = "tl" | "tm" | "tr" | "cl" | "cm" | "cr" | "bl" | "bm" | "br";
 
 export interface UIF_Config {
   /** where the child nodes are placed within the current node; */
-  align?: "tl" | "tm" | "tr" | "cl" | "cm" | "cr" | "bl" | "bm" | "br"
+  align?: AlignType
   /** the fixed Height of this node */
   h?: number
   /** the minimum Height of this node */
@@ -63,26 +60,32 @@ export interface UIF_Config {
   func?: string
   /** set a function that will be called when the current node is clicked on. Its value is a string of the function name; the function itself must be stored in G.FUNCS. */
   button?: string
-  /** add a tooltip when the current node is hovered over by a mouse/controller. Its value is a table: {title = "", text = {"Line1", "Line2"}}. */
-  tooltip?: Tooltip
-}
+  // /** add a tooltip when the current node is hovered over by a mouse/controller. Its value is a table: {title = "", text = {"Line1", "Line2"}}. */
+  // tooltip?: Tooltip
 
-export interface UIF_TextElement {
-  children?: React.ReactNode
-  config?: UIF_TextConfig
-}
+  /* 
+  TEXT CONFIG
+  */
 
-export interface UIF_TextConfig {
   /** set the string to display. Alternatively, you can set text via the ref_table and ref_value combination;  */
   text?: string
-  /** a table containing some data that is relevant to the current node. This is used to pass data to UI nodes or between UI-related functions.*/
-  ref_table?: "<insert your table here>"
-  /** a string corresponding to a key in the current node's ref_table. This is always used in conjunction with ref_table to access the relevant value by key. */
-  ref_value?: string
-  /** set the text colour. Standard values are G.C.UI.TEXT_LIGHT, G.C.UI.TEXT_DARK, and G.C.UI.TEXT_INACTIVE */
-  colour: ColourType
+  // /** a table containing some data that is relevant to the current node. This is used to pass data to UI nodes or between UI-related functions.*/
+  // ref_table?: "<insert your table here>"
+  // /** a string corresponding to a key in the current node's ref_table. This is always used in conjunction with ref_table to access the relevant value by key. */
+  // ref_value?: string
+  // /** set the text colour. Standard values are G.C.UI.TEXT_LIGHT, G.C.UI.TEXT_DARK, and G.C.UI.TEXT_INACTIVE */
+  // colour: ColourType
   /** set a multiplier to text size. */
-  scale: number
+  scale?: number
   /** set to true to draw the text vertically (ie. sideways). */
   vert?: boolean
+}
+
+export type NodeType = "G.UIT.ROOT" | "G.UIT.R" | "G.UIT.C" | "G.UIT.T" | "G.UIT.B"
+
+export interface UINode {
+  id: string;
+  n: NodeType
+  config?: UIF_Config
+  nodes?: UINode[]
 }
