@@ -23,7 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     <div className="flex flex-col w-1/6 h-screen p-6 text-black-dark">
       {specialTabs.map((tab) => (
         <div onClick={tab.func} key={tab.label}
-          className="cursor-pointer flex min-h-15 bg-mint-dark border-2 border-mint-darker rounded-2xl m-2 justify-center items-center">
+          className="cursor-pointer flex min-h-15 bg-mint-dark border-2 border-mint-darker rounded-lg m-2 justify-center items-center">
           {tab.label}
         </div>
       ))}

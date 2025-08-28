@@ -53,7 +53,7 @@ export interface UIF_Config {
   /** set a custom ID to the current node. */
   id?: string
   /** a table containing some data that is relevant to the current node. This is used to pass data to UI nodes or between UI-related functions.*/
-  ref_table?: "<insert your table here>"
+  ref_table?: string
   /** a string corresponding to a key in the current node's ref_table. This is always used in conjunction with ref_table to access the relevant value by key. */
   ref_value?: string
   /** set a function that will be called when the current node is being drawn. Its value is a string of the function name; the function itself must be stored in G.FUNCS. */

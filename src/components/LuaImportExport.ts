@@ -1,4 +1,4 @@
-import type { UINode } from "../types";
+import type { UIF_Config, UINode } from "../types";
 
 export const normalizeUINodeData = (node: UINode): UINode => {
   return {
@@ -9,16 +9,29 @@ export const normalizeUINodeData = (node: UINode): UINode => {
   }
 }
 
-const _UIToLua = (node: UINode): string => {
-  const n = node.n
+const parseConfig = (config?: UIF_Config): string => {
   const configEntries: string[] = []
-  Object.entries(node.config ?? {}).forEach(([key, value]) => {
-    if (typeof value === "string" && key !== "colour" && key !== "ref_table") {
+  Object.entries(config ?? {}).forEach(([key, value]) => {
+    if (typeof value === "string" && key !== "colour") {
       value = `"${value}"`
     }
-    configEntries.push(`${key} = ${value}`)
+    if (key === "ref_table") {
+      configEntries.push(`${key} = loadstring(${value})()`)
+    } else {
+      configEntries.push(`${key} = ${value}`)
+    }
   })
-  const config = configEntries.join(", ")
+
+  return configEntries.join(", ")
+}
+
+const _UIToLua = (node: UINode): string => {
+  const n = node.n
+
+
+
+  const config = parseConfig(node.config)
+
   return `{
   n = ${n},
   ${config

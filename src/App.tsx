@@ -67,7 +67,7 @@ function getNodeById(node: UINode, nodeId: string): UINode | undefined {
 
 function AppContent() {
   const [rootNode, setRootNode] = useState<UINode>({ id: crypto.randomUUID(), n: "G.UIT.ROOT", config: {}, nodes: [] })
-  const [editingConfig, setEditingConfig] = useState<{ config: UIF_Config, nodeId: string } | undefined>()
+  const [editingConfig, setEditingConfig] = useState<UINode | undefined>()
   const handleOnSave = () => {
     exportUIAsJSON(rootNode)
   }
@@ -112,13 +112,13 @@ function AppContent() {
   const handleConfigEdit = (nodeId: string) => {
     const oldNode = getNodeById(rootNode, nodeId)
     if (oldNode && oldNode.config) {
-      setEditingConfig({ config: oldNode.config, nodeId })
+      setEditingConfig(oldNode)
     }
   };
   const handleSaveConfig = (newConfig: UIF_Config) => {
     if (!editingConfig) return;
 
-    setRootNode(editNode(rootNode, editingConfig.nodeId, { config: newConfig }))
+    setRootNode(editNode(rootNode, editingConfig.id, { config: newConfig }))
   }
 
   const handleNodeTypeEdit = (newNodeType: NodeType, nodeId: string) => {
@@ -143,7 +143,7 @@ function AppContent() {
       {editingConfig && (
         <EditConfig
           isOpen={!!editingConfig}
-          config_n_id={editingConfig}
+          node={editingConfig}
           onClose={() => setEditingConfig(undefined)}
           onSave={handleSaveConfig}
         />

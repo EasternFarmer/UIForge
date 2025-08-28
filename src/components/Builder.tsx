@@ -52,9 +52,9 @@ const EditorPanel: React.FC<EditorPanelProps> = ({
     "G.UIT.T": "Text Node",
   }
   return (
-    <div className={`ml-${indent} rounded-2xl bg-black-dark min-h-20 grid grid-cols-9 mb-3`}>
-      {/* <div className="cursor-pointer m-3 min-w-13 min-h-13 bg-balatro-red border-balatro-redshadow border-2 rounded-2xl col-start-1 col-end-3 text-center">{mapNodeType[node.n]}</div> */}
-      <select className="text-white cursor-pointer m-3 min-w-13 min-h-13 bg-balatro-red border-balatro-redshadow border-2 rounded-2xl col-start-1 col-end-4 text-center"
+    <div className={`ml-${indent} rounded-lg bg-black-dark min-h-20 grid grid-cols-9 mb-3`}>
+      {/* <div className="cursor-pointer m-3 min-w-13 min-h-13 bg-balatro-red border-balatro-redshadow border-2 rounded-lg col-start-1 col-end-3 text-center">{mapNodeType[node.n]}</div> */}
+      <select className="text-white cursor-pointer m-3 min-w-13 min-h-13 bg-balatro-red border-balatro-redshadow border-2 rounded-lg col-start-1 col-end-4 text-center"
         onChange={(e) => {
           onNodeTypeChange(e.target.value as NodeType, node.id)
         }}
@@ -66,10 +66,10 @@ const EditorPanel: React.FC<EditorPanelProps> = ({
           </option>
         ))}
       </select>
-      <div onClick={onConfigEdit} className="cursor-pointer m-3 mx-10 bg-mint-dark border-mint-darker border-2 rounded-2xl col-start-4 col-end-7 flex justify-center items-center text-2xl"> Config</div>
+      <div onClick={onConfigEdit} className="cursor-pointer m-3 mx-10 bg-mint-dark border-mint-darker border-2 rounded-lg col-start-4 col-end-7 flex justify-center items-center text-2xl"> Config</div>
       <div className="col-start-7 col-end-9 flex">
-        <div onClick={onAddChildNode} className="cursor-pointer m-3 bg-balatro-red border-balatro-redshadow border-2 rounded-2xl text-white flex justify-center"><PlusIcon /></div>
-        <div onClick={onRemoveNode} className="cursor-pointer m-3 bg-balatro-red border-balatro-redshadow border-2 rounded-2xl text-white flex justify-center"><MinusIcon /></div>
+        <div onClick={onAddChildNode} className="cursor-pointer m-3 bg-balatro-red border-balatro-redshadow border-2 rounded-lg text-white flex justify-center"><PlusIcon /></div>
+        <div onClick={onRemoveNode} className="cursor-pointer m-3 bg-balatro-red border-balatro-redshadow border-2 rounded-lg text-white flex justify-center"><MinusIcon /></div>
       </div>
     </div>
   )
@@ -114,7 +114,7 @@ const Editor: React.FC<EditorProps> = ({
   handleNodeTypeEdit,
 }) => {
   return (
-    <div className="border-black-light border-2 rounded-2xl m-8 p-3 pt-6">
+    <div className="border-black-light border-2 rounded-lg m-8 p-3 pt-6">
       <Parsenode
         node={node}
         indent={0}
